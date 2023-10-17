@@ -34,17 +34,17 @@ class SuratkeluarController extends Controller
     {
         $request->validate([
             'tglsurat'=>'required',
-            'tglmasuk'=>'required',
+            'tglkeluar'=>'required',
             'nosurat'=>'required',
-            'pengirim'=>'required',
+            'penerima'=>'required',
             'isi'=>'required',
             'file'=>'required|mimes:pdf|max:10000'
         ],
         [
             'tglsurat.required'=>'Kolom Tanggal Surat tidak boleh kosong',
-            'tglmasuk.required'=>'Kolom Tanggal Masuk tidak boleh kosong',
+            'tglkeluar.required'=>'Kolom Tanggal Keluar tidak boleh kosong',
             'nosurat.required'=>'Kolom No. Surat tidak boleh kosong',
-            'pengirim.required'=>'Kolom Pengirim tidak boleh kosong',
+            'penerima.required'=>'Kolom Penerima tidak boleh kosong',
             'isi.required'=>'Kolom Isi Ringkas tidak boleh kosong',
             'file.required'=>'Silahkan pilih file surat',
             'file.mimes'=>'Tipe File harus PDF',
@@ -57,16 +57,16 @@ class SuratkeluarController extends Controller
 
         $simpan = Suratkeluar::create([
             'tgl_surat'=>$request->tglsurat,
-            'tgl_masuk'=>$request->tglmasuk,
+            'tgl_keluar'=>$request->tglkeluar,
             'no_surat'=>$request->nosurat,
-            'pengirim'=>$request->pengirim,
+            'penerima'=>$request->penerima,
             'ringkasan'=>$request->isi,
             'file_surat'=>$new_name,
         ]);
 
         $simpan->save();
 
-        return redirect()->route('suratkeluar.index')->with('success','Data Surat Masuk sudah berhasil disimpan');
+        return redirect()->route('suratkeluar.index')->with('success','Data Surat Keluar sudah berhasil disimpan');
     }
 
     /**
@@ -93,17 +93,17 @@ class SuratkeluarController extends Controller
     {
         $request->validate([
             'tglsurat'=>'required',
-            'tglmasuk'=>'required',
+            'tglkeluar'=>'required',
             'nosurat'=>'required',
-            'pengirim'=>'required',
+            'penerima'=>'required',
             'isi'=>'required',
             'file'=>'mimes:pdf|max:10000'
         ],
         [
             'tglsurat.required'=>'Kolom Tanggal Surat tidak boleh kosong',
-            'tglmasuk.required'=>'Kolom Tanggal Masuk tidak boleh kosong',
+            'tglkeluar.required'=>'Kolom Tanggal Keluar tidak boleh kosong',
             'nosurat.required'=>'Kolom No. Surat tidak boleh kosong',
-            'pengirim.required'=>'Kolom Pengirim tidak boleh kosong',
+            'penerima.required'=>'Kolom Penerima tidak boleh kosong',
             'isi.required'=>'Kolom Isi Ringkas tidak boleh kosong',
             'file.required'=>'Silahkan pilih file surat',
             'file.mimes'=>'Tipe File harus PDF',
@@ -114,20 +114,20 @@ class SuratkeluarController extends Controller
 
         $suratkeluar->no_surat = $request->nosurat;
         $suratkeluar->tgl_surat = $request->tglsurat;
-        $suratkeluar->tgl_masuk = $request->tglmasuk;
-        $suratkeluar->pengirim = $request->pengirim;
+        $suratkeluar->tgl_keluar = $request->tglkeluar;
+        $suratkeluar->penerima = $request->penerima;
         $suratkeluar->ringkasan = $request->isi;
 
         if($filesurat != "")
         {
             $new_name = rand().'.'.$filesurat->extension();
-            $filesurat->move('./suratmasukfile',$new_name);
+            $filesurat->move('./suratkeluarfile',$new_name);
             $suratkeluar->file_surat = $new_name;
         }
 
         $suratkeluar->save();
 
-        return redirect()->route('suratmasuks.index')->with('success','Ubah Surat Masuk sudah berhasil disimpan');
+        return redirect()->route('suratkeluars.index')->with('success','Ubah Surat Keluar sudah berhasil disimpan');
     }
 
     /**
@@ -137,7 +137,7 @@ class SuratkeluarController extends Controller
     {
         $suratkeluar->delete();
         
-        return redirect()->route('suratkeluar.index')->with('success','Data Surat Masuk sudah berhasil dihapus');
+        return redirect()->route('suratkeluar.index')->with('success','Data Surat Keluar sudah berhasil dihapus');
     }
 
 
