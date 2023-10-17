@@ -39,7 +39,7 @@
                 <td>{{$row->ringkasan}}</td>
                 <td>
                 <form action="{{route('suratkeluar.destroy',$row->id)}}" method="post">
-                  <a class="mx-1 btn btn-success btn-sm" href="{{route('suratmasuks.show', $row->id)}}">
+                  <a class="mx-1 btn btn-success btn-sm" href="{{route('suratkeluar.show', $row->id)}}">
                     <i class="fa fa-eye"></i>
                   </a>&nbsp;
                   <a class="mx-1 btn btn-warning btn-sm" href="{{route('suratkeluar.edit', $row->id)}}">

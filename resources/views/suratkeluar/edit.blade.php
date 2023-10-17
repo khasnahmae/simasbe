@@ -3,18 +3,18 @@
 <div class="px-4 py-5">
 <div class="card">
 <div class="card-header">
-<div class="card-title"><h4>Ubah Surat Masuk</h4></div>
+<div class="card-title"><h4>Ubah Surat Keluar</h4></div>
 </div>
 <div class="card-body">
 
-<form action="{{ route('suratmasuks.update', $suratmasuk->id) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('suratkeluar.update', $suratkeluar->id) }}" method="post" enctype="multipart/form-data">
   @csrf
   @method('PUT')
   <p><b>Kolom bertanda <span class="text-danger">*)</span> tidak boleh kosong</b></p>
   <div class="row">
       <div class="col">
         <label for="">No. Surat <span class="text-danger">*)</span></label>
-        <input type="text" name="nosurat" class="form-control @if($errors->has('nosurat')) is-invalid @endif" placeholder="Masukkan No. Surat" value="{{$suratmasuk->no_surat}}">                  
+        <input type="text" name="nosurat" class="form-control @if($errors->has('nosurat')) is-invalid @endif" placeholder="Masukkan No. Surat" value="{{$suratkeluar->no_surat}}">                  
           @if($errors->has('nosurat'))
           <small class="text-danger">
             {{$errors->first('nosurat')}}
@@ -26,7 +26,7 @@
   <div class="row mt-3">
       <div class="col">
         <label for="">Tgl. Surat <span class="text-danger">*)</span></label>
-        <input type="date" name="tglsurat" class="form-control @if($errors->has('tglsurat')) is-invalid @endif" placeholder="Masukkan Tgl. Surat" value="{{$suratmasuk->tgl_surat}}">                  
+        <input type="date" name="tglsurat" class="form-control @if($errors->has('tglsurat')) is-invalid @endif" placeholder="Masukkan Tgl. Surat" value="{{$suratkeluar->tgl_surat}}">                  
           @if($errors->has('tglsurat'))
           <small class="text-danger">
             {{$errors->first('tglsurat')}}
@@ -37,11 +37,11 @@
   </div>
   <div class="row mt-3">
       <div class="col">
-        <label for="">Tgl. Masuk <span class="text-danger">*)</span></label>
-        <input type="date" name="tglmasuk" class="form-control @if($errors->has('tglmasuk')) is-invalid @endif" placeholder="Masukkan Tgl. Masuk" value="{{$suratmasuk->tgl_masuk}}">                  
-          @if($errors->has('tglmasuk'))
+        <label for="">Tgl. Keluar <span class="text-danger">*)</span></label>
+        <input type="date" name="tglkeluar" class="form-control @if($errors->has('tglkeluar')) is-invalid @endif" placeholder="Masukkan Tgl. Keluar" value="{{$suratkeluar->tgl_keluar}}">                  
+          @if($errors->has('tglkeluar'))
           <small class="text-danger">
-            {{$errors->first('tglmasuk')}}
+            {{$errors->first('tglkeluar')}}
           </small>
           @endif
         
@@ -49,11 +49,11 @@
   </div>
   <div class="row mt-3">
       <div class="col">
-        <label for="">Pengirim <span class="text-danger">*)</span></label>
-        <input type="text" name="pengirim" class="form-control @if($errors->has('pengirim')) is-invalid @endif" placeholder="Masukkan Pengirim Surat" value="{{$suratmasuk->pengirim}}">                  
-          @if($errors->has('pengirim'))
+        <label for="">Penerima <span class="text-danger">*)</span></label>
+        <input type="text" name="penerima" class="form-control @if($errors->has('penerima')) is-invalid @endif" placeholder="Masukkan Penerima Surat" value="{{$suratmasuk->penerima}}">                  
+          @if($errors->has('penerima'))
           <small class="text-danger">
-            {{$errors->first('pengirim')}}
+            {{$errors->first('penerima')}}
           </small>
           @endif
         
@@ -63,7 +63,7 @@
   <div class="row mt-3">
       <div class="col">
         <label for="">Isi Ringkas <span class="text-danger">*)</span></label>
-        <textarea name="isi" class="form-control @if($errors->has('isi')) is-invalid @endif" placeholder="Masukkan Isi Ringkas" rows="5">{{$suratmasuk->ringkasan}}</textarea>
+        <textarea name="isi" class="form-control @if($errors->has('isi')) is-invalid @endif" placeholder="Masukkan Isi Ringkas" rows="5">{{$suratkeluar->ringkasan}}</textarea>
         
           @if($errors->has('isi'))
           <small class="text-danger">

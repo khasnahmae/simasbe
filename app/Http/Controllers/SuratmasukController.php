@@ -140,7 +140,6 @@ class SuratmasukController extends Controller
         return redirect()->route('suratmasuks.index')->with('success','Data Surat Masuk sudah berhasil dihapus');
     }
 
-
     public function import()
     {
         return view('suratmasuk.import');

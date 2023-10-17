@@ -3,11 +3,11 @@
 <div class="px-4 py-5">
 <div class="card">
 <div class="card-header">
-  <div class="card-title"><h4>Tambah Surat Masuk</h4></div>
+  <div class="card-title"><h4>Tambah Surat Keluar</h4></div>
 </div>
 <div class="card-body">
   
-<form action="{{ route('suratmasuks.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('suratkeluar.store') }}" method="post" enctype="multipart/form-data">
   @csrf
   <p><b>Kolom bertanda <span class="text-danger">*)</span> tidak boleh kosong</b></p>
   <div class="row">
@@ -36,11 +36,11 @@
   </div>
   <div class="row mt-3">
       <div class="col">
-        <label for="">Tgl. Masuk <span class="text-danger">*)</span></label>
-        <input type="date" name="tglmasuk" class="form-control @if($errors->has('tglmasuk')) is-invalid @endif" placeholder="Masukkan Tgl. Masuk" value="{{old('tglmasuk')}}">                  
-          @if($errors->has('tglmasuk'))
+        <label for="">Tgl. Keluar <span class="text-danger">*)</span></label>
+        <input type="date" name="tglkeluar" class="form-control @if($errors->has('tglkeluar')) is-invalid @endif" placeholder="Masukkan Tgl. Keluar" value="{{old('tglkeluar')}}">                  
+          @if($errors->has('tglkeluar'))
           <small class="text-danger">
-            {{$errors->first('tglmasuk')}}
+            {{$errors->first('tglkeluar')}}
           </small>
           @endif
         
@@ -48,11 +48,11 @@
   </div>
   <div class="row mt-3">
       <div class="col">
-        <label for="">Pengirim <span class="text-danger">*)</span></label>
-        <input type="text" name="pengirim" class="form-control @if($errors->has('pengirim')) is-invalid @endif" placeholder="Masukkan Pengirim Surat" value="{{old('pengirim')}}">                  
-          @if($errors->has('pengirim'))
+        <label for="">Penerima <span class="text-danger">*)</span></label>
+        <input type="text" name="penerima" class="form-control @if($errors->has('penerima')) is-invalid @endif" placeholder="Masukkan Penerima Surat" value="{{old('penerima')}}">                  
+          @if($errors->has('penerima'))
           <small class="text-danger">
-            {{$errors->first('pengirim')}}
+            {{$errors->first('penerima')}}
           </small>
           @endif
         
@@ -63,7 +63,6 @@
       <div class="col">
         <label for="">Isi Ringkas <span class="text-danger">*)</span></label>
         <textarea name="isi" class="form-control @if($errors->has('isi')) is-invalid @endif" placeholder="Masukkan Isi Ringkas" rows="5"></textarea>
-        
           @if($errors->has('isi'))
           <small class="text-danger">
             {{$errors->first('isi')}}
@@ -92,7 +91,7 @@
 <div class="card-footer">
   <div class="my-2">
           <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
-          <a href="{{route('suratmasuks.index')}}" class="btn btn-danger"><i class="fa fa-backward"></i> Kembali</a>
+          <a href="{{route('suratkeluar.index')}}" class="btn btn-danger"><i class="fa fa-backward"></i> Kembali</a>
       </div>
   </form>
 </div>
