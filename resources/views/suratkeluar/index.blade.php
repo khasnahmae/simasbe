@@ -23,8 +23,8 @@
             <tr>
               <th>No.Surat</th>
               <th>Tgl. Surat</th>
-              <th>Tgl. Masuk</th>
-              <th>Pengirim</th>
+              <th>Tgl. Keluar</th>
+              <th>Penerima</th>
               <th>Isi Ringkas</th>
               <th>Aksi</th>
             </tr>
@@ -34,8 +34,8 @@
               <tr>
                 <td>{{$row->no_surat}}</td>
                 <td>{{$row->tgl_surat}}</td>
-                <td>{{$row->tgl_masuk}}</td>
-                <td>{{$row->pengirim}}</td>
+                <td>{{$row->tgl_keluar}}</td>
+                <td>{{$row->penerima}}</td>
                 <td>{{$row->ringkasan}}</td>
                 <td>
                 <form action="{{route('suratkeluar.destroy',$row->id)}}" method="post">
