@@ -7,7 +7,7 @@
 </div>
 <div class="card-body">
 
-<form action="{{ route('suratkeluar.update', $suratkeluar->id) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('suratkeluars.update', $suratkeluar->id) }}" method="post" enctype="multipart/form-data">
   @csrf
   @method('PUT')
   <p><b>Kolom bertanda <span class="text-danger">*)</span> tidak boleh kosong</b></p>
