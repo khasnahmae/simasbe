@@ -7,7 +7,7 @@
 </div>
 <div class="card-body">
   
-<form action="{{ route('suratkeluar.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('suratkeluars.store') }}" method="post" enctype="multipart/form-data">
   @csrf
   <p><b>Kolom bertanda <span class="text-danger">*)</span> tidak boleh kosong</b></p>
   <div class="row">
@@ -48,11 +48,11 @@
   </div>
   <div class="row mt-3">
       <div class="col">
-        <label for="">Penerima <span class="text-danger">*)</span></label>
-        <input type="text" name="penerima" class="form-control @if($errors->has('penerima')) is-invalid @endif" placeholder="Masukkan Penerima Surat" value="{{old('penerima')}}">                  
-          @if($errors->has('penerima'))
+        <label for="">Tujuan <span class="text-danger">*)</span></label>
+        <input type="text" name="tujuan" class="form-control @if($errors->has('tujuan')) is-invalid @endif" placeholder="Masukkan Penerima Surat" value="{{old('tujuan')}}">                  
+          @if($errors->has('tujuan'))
           <small class="text-danger">
-            {{$errors->first('penerima')}}
+            {{$errors->first('tujuan')}}
           </small>
           @endif
         
@@ -91,7 +91,7 @@
 <div class="card-footer">
   <div class="my-2">
           <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
-          <a href="{{route('suratkeluar.index')}}" class="btn btn-danger"><i class="fa fa-backward"></i> Kembali</a>
+          <a href="{{route('suratkeluars.index')}}" class="btn btn-danger"><i class="fa fa-backward"></i> Kembali</a>
       </div>
   </form>
 </div>

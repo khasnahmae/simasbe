@@ -6,7 +6,7 @@
       <div class="card-title">
         <h4>Data Surat Keluar
           <a href="{{route('suratkeluars.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>&nbsp;
-          <a href="{{url('suratkeluarmport')}}" class="btn btn-warning"><i class="fa fa-upload"></i> Import Data</a>&nbsp;
+          <a href="{{url('suratkeluarimport')}}" class="btn btn-warning"><i class="fa fa-upload"></i> Import Data</a>&nbsp;
           <a href="{{url('suratkeluarpdf')}}" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> Export PDF</a>
         </h4>
       </div>
@@ -24,7 +24,7 @@
               <th>No.Surat</th>
               <th>Tgl. Surat</th>
               <th>Tgl. Keluar</th>
-              <th>Penerima</th>
+              <th>Tujuan</th>
               <th>Isi Ringkas</th>
               <th>Aksi</th>
             </tr>
@@ -35,14 +35,14 @@
                 <td>{{$row->no_surat}}</td>
                 <td>{{$row->tgl_surat}}</td>
                 <td>{{$row->tgl_keluar}}</td>
-                <td>{{$row->penerima}}</td>
+                <td>{{$row->tujuan}}</td>
                 <td>{{$row->ringkasan}}</td>
                 <td>
-                <form action="{{route('suratkeluar.destroy',$row->id)}}" method="post">
-                  <a class="mx-1 btn btn-success btn-sm" href="{{route('suratkeluar.show', $row->id)}}">
+                <form action="{{route('suratkeluars.destroy',$row->id)}}" method="post">
+                  <a class="mx-1 btn btn-success btn-sm" href="{{route('suratkeluars.show', $row->id)}}">
                     <i class="fa fa-eye"></i>
                   </a>&nbsp;
-                  <a class="mx-1 btn btn-warning btn-sm" href="{{route('suratkeluar.edit', $row->id)}}">
+                  <a class="mx-1 btn btn-warning btn-sm" href="{{route('suratkeluars.edit', $row->id)}}">
                     <i class="fa fa-edit"></i>
                   </a>&nbsp;                  
                     @csrf

@@ -36,7 +36,7 @@ class SuratkeluarController extends Controller
             'tglsurat'=>'required',
             'tglkeluar'=>'required',
             'nosurat'=>'required',
-            'penerima'=>'required',
+            'tujuan'=>'required',
             'isi'=>'required',
             'file'=>'required|mimes:pdf|max:10000'
         ],
@@ -44,7 +44,7 @@ class SuratkeluarController extends Controller
             'tglsurat.required'=>'Kolom Tanggal Surat tidak boleh kosong',
             'tglkeluar.required'=>'Kolom Tanggal Keluar tidak boleh kosong',
             'nosurat.required'=>'Kolom No. Surat tidak boleh kosong',
-            'penerima.required'=>'Kolom Penerima tidak boleh kosong',
+            'tujuan.required'=>'Kolom Tujuan tidak boleh kosong',
             'isi.required'=>'Kolom Isi Ringkas tidak boleh kosong',
             'file.required'=>'Silahkan pilih file surat',
             'file.mimes'=>'Tipe File harus PDF',
@@ -59,14 +59,14 @@ class SuratkeluarController extends Controller
             'tgl_surat'=>$request->tglsurat,
             'tgl_keluar'=>$request->tglkeluar,
             'no_surat'=>$request->nosurat,
-            'penerima'=>$request->penerima,
+            'tujuan'=>$request->tujuan,
             'ringkasan'=>$request->isi,
             'file_surat'=>$new_name,
         ]);
 
         $simpan->save();
 
-        return redirect()->route('suratkeluar.index')->with('success','Data Surat Keluar sudah berhasil disimpan');
+        return redirect()->route('suratkeluars.index')->with('success','Data Surat Keluar sudah berhasil disimpan');
     }
 
     /**
@@ -95,7 +95,7 @@ class SuratkeluarController extends Controller
             'tglsurat'=>'required',
             'tglkeluar'=>'required',
             'nosurat'=>'required',
-            'penerima'=>'required',
+            'tujuan'=>'required',
             'isi'=>'required',
             'file'=>'mimes:pdf|max:10000'
         ],
@@ -103,7 +103,7 @@ class SuratkeluarController extends Controller
             'tglsurat.required'=>'Kolom Tanggal Surat tidak boleh kosong',
             'tglkeluar.required'=>'Kolom Tanggal Keluar tidak boleh kosong',
             'nosurat.required'=>'Kolom No. Surat tidak boleh kosong',
-            'penerima.required'=>'Kolom Penerima tidak boleh kosong',
+            'tujuan.required'=>'Kolom Tujuan tidak boleh kosong',
             'isi.required'=>'Kolom Isi Ringkas tidak boleh kosong',
             'file.required'=>'Silahkan pilih file surat',
             'file.mimes'=>'Tipe File harus PDF',
@@ -115,7 +115,7 @@ class SuratkeluarController extends Controller
         $suratkeluar->no_surat = $request->nosurat;
         $suratkeluar->tgl_surat = $request->tglsurat;
         $suratkeluar->tgl_keluar = $request->tglkeluar;
-        $suratkeluar->penerima = $request->penerima;
+        $suratkeluar->tujuan = $request->tujuan;
         $suratkeluar->ringkasan = $request->isi;
 
         if($filesurat != "")
@@ -137,7 +137,7 @@ class SuratkeluarController extends Controller
     {
         $suratkeluar->delete();
         
-        return redirect()->route('suratkeluar.index')->with('success','Data Surat Keluar sudah berhasil dihapus');
+        return redirect()->route('suratkeluars.index')->with('success','Data Surat Keluar sudah berhasil dihapus');
     }
 
 
@@ -154,7 +154,7 @@ class SuratkeluarController extends Controller
  
 		Excel::import(new SuratkeluarImport, $request->file('file'));
         
-        return redirect()->route('suratkeluar.index')->with('success','Import data berhasil');
+        return redirect()->route('suratkeluars.index')->with('success','Import data berhasil');
  
     }
 
@@ -162,7 +162,7 @@ class SuratkeluarController extends Controller
     {
     	$query = Suratkeluar::all();
  
-    	$pdf = PDF::loadview('suratmasuk.suratkeluar_pdf',['query'=>$query]);
+    	$pdf = PDF::loadview('suratkeluar.suratkeluar_pdf',['query'=>$query]);
     	return $pdf->download('laporan-suratkeluar.pdf');
     }
 }

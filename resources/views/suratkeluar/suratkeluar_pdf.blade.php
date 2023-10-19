@@ -16,7 +16,7 @@
           <th>No.Surat</th>
           <th>Tgl. Surat</th>
           <th>Tgl. Keluar</th>
-          <th>Penerima</th>
+          <th>Tujuan</th>
           <th>Isi Ringkas</th>
         </tr>
       </thead>
@@ -26,7 +26,7 @@
             <td>{{$row->no_surat}}</td>
             <td>{{$row->tgl_surat}}</td>
             <td>{{$row->tgl_keluar}}</td>
-            <td>{{$row->penerima}}</td>
+            <td>{{$row->tujuan}}</td>
             <td>{{$row->ringkasan}}</td>
             
           </tr>

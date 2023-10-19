@@ -49,11 +49,11 @@
   </div>
   <div class="row mt-3">
       <div class="col">
-        <label for="">Penerima <span class="text-danger">*)</span></label>
-        <input type="text" name="penerima" class="form-control @if($errors->has('penerima')) is-invalid @endif" placeholder="Masukkan Penerima Surat" value="{{$suratmasuk->penerima}}">                  
-          @if($errors->has('penerima'))
+        <label for="">Tujuan <span class="text-danger">*)</span></label>
+        <input type="text" name="tujuan" class="form-control @if($errors->has('tujuan')) is-invalid @endif" placeholder="Masukkan Penerima Surat" value="{{$suratkeluar->tujuan}}">                  
+          @if($errors->has('tujuan'))
           <small class="text-danger">
-            {{$errors->first('penerima')}}
+            {{$errors->first('tujuan')}}
           </small>
           @endif
         
@@ -79,7 +79,7 @@
         <label for="">File Surat <span class="text-danger">*)</span></label>
         <input type="file" name="file" class="form-control @if($errors->has('file')) is-invalid @endif" placeholder="Pilih File" value="{{old('file')}}">
         <small>Tipe File : PDF. Max : 10 MB.</small>     <br> 
-        <a href="{{url('suratmasukfile/'.$suratmasuk->file_surat)}}" target="_blank" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat File</a>            
+        <a href="{{url('suratkeluarfile/'.$suratkeluar->file_surat)}}" target="_blank" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat File</a>            
           @if($errors->has('file'))
           <br>
           <small class="text-danger">
@@ -94,7 +94,7 @@
 <div class="card-footer">
 <div class="my-2">
     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan Data</button>
-    <a href="{{route('suratmasuks.index')}}" class="btn btn-danger"><i class="fa fa-backward"></i> Kembali</a>
+    <a href="{{route('suratkeluars.index')}}" class="btn btn-danger"><i class="fa fa-backward"></i> Kembali</a>
 </div>
 </form>
 </div>
