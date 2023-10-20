@@ -1,0 +1,42 @@
+@extends('app')
+
+@section('content')
+<div class="px-4 py-5">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h4>Detail Surat Keluar</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>No. Surat:</th>
+                            <td>{{ $suratkeluar->no_surat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Surat:</th>
+                            <td>{{ $suratkeluar->tgl_surat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Masuk:</th>
+                            <td>{{ $suratkeluar->tgl_keluar }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pengirim:</th>
+                            <td>{{ $suratkeluar->tujuan }}</td>
+                        </tr>
+                        <tr>
+                            <th>Isi Ringkas:</th>
+                            <td>{{ $suratkeluar->ringkasan }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="{{ route('suratkeluars.index') }}" class="btn btn-primary">Kembali</a>
+        </div>
+    </div>
+</div>
+@endsection

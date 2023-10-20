@@ -21,13 +21,14 @@ Route::get('/',[LandingController::class,'index']);
 Route::get('/home',[HomeController::class,'index']);
 
 Route::resource('suratmasuks',SuratmasukController::class);
+Route::get('suratmasuks/{id}', 'SuratMasukController@show')->name('suratmasuks.show');
 
 Route::get('suratmasukimport',[SuratmasukController::class,'import']);
 Route::post('suratmasukimportproses',[SuratmasukController::class,'importproses']);
 Route::get('suratmasukpdf',[SuratmasukController::class,'exportpdf']);
 
 Route::resource('suratkeluars', SuratkeluarController::class);
-
+Route::get('suratkeluars/{id}', 'SuratKeluarController@show')->name('suratkeluars.show');
 Route::get('suratkeluarimport',[SuratkeluarController::class,'import']);
 Route::post('suratkeluarimportproses',[SuratkeluarController::class,'importproses']);
 Route::get('suratkeluarpdf',[SuratkeluarController::class,'exportpdf']);

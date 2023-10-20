@@ -74,7 +74,7 @@ class SuratkeluarController extends Controller
      */
     public function show(Suratkeluar $suratkeluar)
     {
-        return view('suratkeluar.detail',compact('suratkeluar'));
+        return view('suratkeluar.show',compact('suratkeluar'));
     }
 
     /**
