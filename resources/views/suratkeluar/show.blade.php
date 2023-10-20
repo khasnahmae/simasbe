@@ -21,11 +21,11 @@
                             <td>{{ $suratkeluar->tgl_surat }}</td>
                         </tr>
                         <tr>
-                            <th>Tanggal Masuk:</th>
+                            <th>Tanggal Keluar:</th>
                             <td>{{ $suratkeluar->tgl_keluar }}</td>
                         </tr>
                         <tr>
-                            <th>Pengirim:</th>
+                            <th>Tujuan:</th>
                             <td>{{ $suratkeluar->tujuan }}</td>
                         </tr>
                         <tr>
