@@ -74,7 +74,7 @@ class SuratmasukController extends Controller
      */
     public function show(Suratmasuk $suratmasuk)
     {
-        return view('suratmasuk.show',compact('suratmasuk'));
+        return view('suratmasuk.detail',compact('suratmasuk'));
     }
 
     /**

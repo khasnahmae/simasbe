@@ -32,6 +32,10 @@
                             <th>Isi Ringkas:</th>
                             <td>{{ $suratmasuk->ringkasan }}</td>
                         </tr>
+                        <tr>
+                            <th>File Surat:</th>
+                            <td>{{ $suratmasuk->file_surat }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
