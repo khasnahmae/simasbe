@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Suratkeluar;
 use Illuminate\Http\Request;
 use App\Imports\SuratkeluarImport;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
@@ -51,17 +52,19 @@ class SuratkeluarController extends Controller
             'file.max'=>'Ukuran file tidak boleh dari 10 MB',
         ]);
 
-        $filesurat = $request->file('file');
-        $new_name = 'SRM'.date('Ymd').'.'.$filesurat->extension();
-        $filesurat->move('./suratkeluarfile/'.$new_name);
-
+        if ($request->hasFile('file')) {
+            $fileSurat = $request->file('file');
+            $newName = 'SRK' . date('Ymd') . '.' . rand() . '.' . 
+            $fileSurat->getClientOriginalExtension();
+            $fileSurat->storeAs('public/suratkeluar/', $newName);
+        }
         $simpan = Suratkeluar::create([
             'tgl_surat'=>$request->tglsurat,
             'tgl_keluar'=>$request->tglkeluar,
             'no_surat'=>$request->nosurat,
             'tujuan'=>$request->tujuan,
             'ringkasan'=>$request->isi,
-            'file_surat'=>$new_name,
+            'file_surat'=>$newName,
         ]);
 
         $simpan->save();
@@ -118,13 +121,18 @@ class SuratkeluarController extends Controller
         $suratkeluar->tujuan = $request->tujuan;
         $suratkeluar->ringkasan = $request->isi;
 
-        if($filesurat != "")
-        {
-            $new_name = rand().'.'.$filesurat->extension();
-            $filesurat->move('./suratkeluarfile',$new_name);
+
+        if ($filesurat != '') {
+            $new_name = 'SRK' . date('Ymd') . '.' . rand() . '.' . $filesurat->extension();
+            $filesurat->storeAs('public/suratkeluar/', $new_name);
+            // Hapus file lama jika ada
+            $oldFilePath = 'storage/suratkeluar/' . $suratkeluar->file_surat;
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+
             $suratkeluar->file_surat = $new_name;
         }
-
         $suratkeluar->save();
 
         return redirect()->route('suratkeluars.index')->with('success','Ubah Surat Keluar sudah berhasil disimpan');
@@ -135,9 +143,15 @@ class SuratkeluarController extends Controller
      */
     public function destroy(Suratkeluar $suratkeluar)
     {
+        // menghapus record terpilih
         $suratkeluar->delete();
-        
-        return redirect()->route('suratkeluars.index')->with('success','Data Surat Keluar sudah berhasil dihapus');
+
+        // Hapus file dari folder storage public
+        Storage::delete('public/suratkeluar/' . $suratkeluar->file_surat);
+
+        return redirect()
+            ->route('suratkeluars.index')
+            ->with('success', 'Data Surat Keluar sudah berhasil dihapus');
     }
 
 

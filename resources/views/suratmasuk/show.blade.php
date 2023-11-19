@@ -13,28 +13,28 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th>No. Surat:</th>
-                            <td>{{ $suratmasuk->no_surat }}</td>
+                            <th>No. Surat</th>
+                            <td> : {{ $suratmasuk->no_surat }}</td>
                         </tr>
                         <tr>
-                            <th>Tanggal Surat:</th>
-                            <td>{{ $suratmasuk->tgl_surat }}</td>
+                            <th>Tanggal Surat</th>
+                            <td> : {{ $suratmasuk->tgl_surat }}</td>
                         </tr>
                         <tr>
-                            <th>Tanggal Masuk:</th>
-                            <td>{{ $suratmasuk->tgl_masuk }}</td>
+                            <th>Tanggal Masuk</th>
+                            <td> : {{ $suratmasuk->tgl_masuk }}</td>
                         </tr>
                         <tr>
-                            <th>Pengirim:</th>
-                            <td>{{ $suratmasuk->pengirim }}</td>
+                            <th>Pengirim</th>
+                            <td> : {{ $suratmasuk->pengirim }}</td>
                         </tr>
                         <tr>
-                            <th>Isi Ringkas:</th>
-                            <td>{{ $suratmasuk->ringkasan }}</td>
+                            <th>Isi Ringkas</th>
+                            <td> : {{ $suratmasuk->ringkasan }}</td>
                         </tr>
                         <tr>
-                            <th>File Surat:</th>
-                            <td>{{ $suratmasuk->file_surat }}</td>
+                            <th>File Surat</th>
+                            <td><p> : <a href="{{ Storage::url('public/suratmasuk/' . $suratmasuk->file_surat) }}" target="_blank">{{ $suratmasuk->file_surat }}</a></p></td>
                         </tr>
                     </tbody>
                 </table>

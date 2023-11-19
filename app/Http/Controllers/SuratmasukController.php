@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Suratmasuk;
 use Illuminate\Http\Request;
 use App\Imports\SuratmasukImport;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
@@ -38,7 +39,8 @@ class SuratmasukController extends Controller
             'nosurat'=>'required',
             'pengirim'=>'required',
             'isi'=>'required',
-            'file'=>'required|mimes:pdf|max:10000'
+            'file'=>'required|mimes:pdf|max:10000',
+            
         ],
         [
             'tglsurat.required'=>'Kolom Tanggal Surat tidak boleh kosong',
@@ -49,11 +51,15 @@ class SuratmasukController extends Controller
             'file.required'=>'Silahkan pilih file surat',
             'file.mimes'=>'Tipe File harus PDF',
             'file.max'=>'Ukuran file tidak boleh dari 10 MB',
+            
         ]);
 
-        $filesurat = $request->file('file');
-        $new_name = 'SRM'.date('Ymd').'.'.$filesurat->extension();
-        $filesurat->move('./suratmasukfile/'.$new_name);
+        if ($request->hasFile('file')) {
+            $fileSurat = $request->file('file');
+            $newName = 'SRM' . date('Ymd') . '.' . rand() . '.' . 
+            $fileSurat->getClientOriginalExtension();
+            $fileSurat->storeAs('public/suratmasuk/', $newName);
+        }
 
         $simpan = Suratmasuk::create([
             'tgl_surat'=>$request->tglsurat,
@@ -61,7 +67,7 @@ class SuratmasukController extends Controller
             'no_surat'=>$request->nosurat,
             'pengirim'=>$request->pengirim,
             'ringkasan'=>$request->isi,
-            'file_surat'=>$new_name,
+            'file_surat'=>$newName,
         ]);
 
         $simpan->save();
@@ -118,10 +124,16 @@ class SuratmasukController extends Controller
         $suratmasuk->pengirim = $request->pengirim;
         $suratmasuk->ringkasan = $request->isi;
 
-        if($filesurat != "")
-        {
-            $new_name = rand().'.'.$filesurat->extension();
-            $filesurat->move('./suratmasukfile',$new_name);
+        if ($filesurat != '') {
+            $new_name = 'SRM' . date('Ymd') . '.' . rand() . '.' . 
+            $filesurat->extension();
+            $filesurat->storeAs('public/suratmasuk/', $new_name);
+            // Hapus file lama jika ada
+            $oldFilePath = 'storage/suratmasuk/' . $suratmasuk->file_surat;
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+
             $suratmasuk->file_surat = $new_name;
         }
 
@@ -135,9 +147,15 @@ class SuratmasukController extends Controller
      */
     public function destroy(Suratmasuk $suratmasuk)
     {
+        // menghapus record terpilih
         $suratmasuk->delete();
-        
-        return redirect()->route('suratmasuks.index')->with('success','Data Surat Masuk sudah berhasil dihapus');
+
+        // Hapus file dari folder storage public
+        Storage::delete('public/suratmasuk/' . $suratmasuk->file_surat);
+
+        return redirect()
+            ->route('suratmasuks.index')
+            ->with('success', 'Data Surat Masuk sudah berhasil dihapus');
     }
 
     public function import()

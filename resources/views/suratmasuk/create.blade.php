@@ -83,11 +83,22 @@
           <small class="text-danger">
             {{$errors->first('file')}}
           </small>
-          @endif
-        
+          @endif       
       </div>
   </div>
-
+  <div class="row mt-3">
+    <div class="col">
+      <label for="foto">Foto Surat <span class="text-danger">*)</span></label>
+      <input type="file" name="foto" class="form-control @if($errors->has('foto')) is-invalid @endif" placeholder="Pilih Foto" value="{{old('foto')}}">
+      <small>Tipe Foto : PNG, JPG, JPEG. Max : 2 MB.</small>                  
+        @if($errors->has('foto'))
+        <br>
+        <small class="text-danger">
+          {{$errors->first('foto')}}
+        </small>
+        @endif       
+    </div>
+</div>
 </div>
 <div class="card-footer">
   <div class="my-2">

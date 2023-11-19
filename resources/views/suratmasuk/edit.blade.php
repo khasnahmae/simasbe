@@ -79,7 +79,7 @@
         <label for="">File Surat <span class="text-danger">*)</span></label>
         <input type="file" name="file" class="form-control @if($errors->has('file')) is-invalid @endif" placeholder="Pilih File" value="{{old('file')}}">
         <small>Tipe File : PDF. Max : 10 MB.</small>     <br> 
-        <a href="{{url('suratmasukfile/'.$suratmasuk->file_surat)}}" target="_blank" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat File</a>            
+        <a href="{{ Storage::url('public/suratmasuk/' . $suratmasuk->file_surat) }}" target="_blank" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat File</a>   
           @if($errors->has('file'))
           <br>
           <small class="text-danger">
