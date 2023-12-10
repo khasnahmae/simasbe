@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Suratmasuk;
 use Illuminate\Http\Request;
 use App\Imports\SuratmasukImport;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
@@ -40,7 +41,7 @@ class SuratmasukController extends Controller
             'pengirim'=>'required',
             'isi'=>'required',
             'file'=>'required|mimes:pdf|max:10000',
-            
+            'foto'=>'required|mimes:jpeg,jpg,png'
         ],
         [
             'tglsurat.required'=>'Kolom Tanggal Surat tidak boleh kosong',
@@ -51,8 +52,13 @@ class SuratmasukController extends Controller
             'file.required'=>'Silahkan pilih file surat',
             'file.mimes'=>'Tipe File harus PDF',
             'file.max'=>'Ukuran file tidak boleh dari 10 MB',
-            
+            'foto.required'=>'Silakan masukkan foto',
+            'foto.mimes'=> 'Foto hanya diperbolehkan berekstensi JPEG, JPG, PNG',
         ]);
+        $foto_file = $request->file('foto');
+        $foto_ekstensi = $foto_file->extension();
+        $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
+        $foto_file->move(public_path('foto'), $foto_nama);
 
         if ($request->hasFile('file')) {
             $fileSurat = $request->file('file');
@@ -68,6 +74,7 @@ class SuratmasukController extends Controller
             'pengirim'=>$request->pengirim,
             'ringkasan'=>$request->isi,
             'file_surat'=>$newName,
+            'foto' => $foto_nama,
         ]);
 
         $simpan->save();
@@ -117,7 +124,8 @@ class SuratmasukController extends Controller
         ]);
 
         $filesurat = $request->file('file');
-
+        
+        
         $suratmasuk->no_surat = $request->nosurat;
         $suratmasuk->tgl_surat = $request->tglsurat;
         $suratmasuk->tgl_masuk = $request->tglmasuk;
@@ -152,7 +160,7 @@ class SuratmasukController extends Controller
 
         // Hapus file dari folder storage public
         Storage::delete('public/suratmasuk/' . $suratmasuk->file_surat);
-
+        
         return redirect()
             ->route('suratmasuks.index')
             ->with('success', 'Data Surat Masuk sudah berhasil dihapus');

@@ -21,6 +21,7 @@
         <table class="table" id="listdata">
           <thead>
             <tr>
+              <th>Foto</th>
               <th>No.Surat</th>
               <th>Tgl. Surat</th>
               <th>Tgl. Masuk</th>
@@ -32,6 +33,13 @@
           <tbody>
             @foreach($query as $row)
               <tr>
+                <td>
+                  @if ($row->foto)
+                    <img style="max-widht:50px;
+                    max-height:50px;" src="{{ url('foto').'/'.
+                    $row->foto }}"
+                  @endif
+                <td>
                 <td>{{$row->no_surat}}</td>
                 <td>{{$row->tgl_surat}}</td>
                 <td>{{$row->tgl_masuk}}</td>
